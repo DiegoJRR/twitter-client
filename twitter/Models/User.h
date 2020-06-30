@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface User : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *screenName;
+@property (nonatomic, strong) NSURL *profile_image_url_https;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end
