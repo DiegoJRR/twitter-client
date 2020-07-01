@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F7E3E6E24ABD8D2000D695E /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 2F7E3E6D24ABD8D2000D695E /* .env */; };
 		2F7FF8B624AA825E006682C9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2F7FF8B524AA825E006682C9 /* .gitignore */; };
 		2FCFE67124AA964A0068E351 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCFE67024AA964A0068E351 /* User.m */; };
 		2FCFE67424AA97880068E351 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCFE67324AA97880068E351 /* Tweet.m */; };
@@ -26,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		1397EA94AE1DE5F26C1724FD /* Pods-twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-twitter/Pods-twitter.release.xcconfig"; sourceTree = "<group>"; };
-		2F7E3E6D24ABD8D2000D695E /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		2F7FF8B524AA825E006682C9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2FCFE66F24AA964A0068E351 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		2FCFE67024AA964A0068E351 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 				6AD278E320BC4B970085BC29 /* LaunchScreen.storyboard */,
 				6AD278E620BC4B970085BC29 /* Info.plist */,
 				6AD278E720BC4B970085BC29 /* main.m */,
-				2F7E3E6D24ABD8D2000D695E /* .env */,
 			);
 			path = twitter;
 			sourceTree = "<group>";
@@ -221,7 +218,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F7E3E6E24ABD8D2000D695E /* .env in Resources */,
 				2F7FF8B624AA825E006682C9 /* .gitignore in Resources */,
 				6AD278E520BC4B970085BC29 /* LaunchScreen.storyboard in Resources */,
 				6AD278E220BC4B970085BC29 /* Assets.xcassets in Resources */,
