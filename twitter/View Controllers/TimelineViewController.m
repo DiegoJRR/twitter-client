@@ -28,7 +28,7 @@
     self.tableView.delegate = self;
     
     // Added a fixed cell height for now, later this will be changed to auto layout
-    self.tableView.rowHeight = 150;
+    self.tableView.rowHeight = 210;
     
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
@@ -62,10 +62,16 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
+    Tweet *tweet = (Tweet *)self.tweets[indexPath.row];
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
-    Tweet *tweet = (Tweet *)self.tweets[indexPath.row];
+    // Set the basic properties for the tweet cell
     cell.tweetLabel.text = tweet.text;
+    cell.usernameLabel.text = tweet.user.name;
+    cell.handleLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
+    cell.dateLabel.text = tweet.createdAtString;
+    [cell.retweetButton setTitle:[NSString stringWithFormat:@"%i", tweet.retweetCount] forState:UIControlStateNormal];
+    [cell.favButton setTitle:[NSString stringWithFormat:@"%i", tweet.favoriteCount] forState:UIControlStateNormal];
     
     // Create the request for the user profile image
     NSURLRequest *request = [NSURLRequest requestWithURL:tweet.user.profile_image_url_https];
