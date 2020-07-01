@@ -15,10 +15,25 @@
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tweets;
-
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation TimelineViewController
+
+- (void)getTimeline {
+    // Get timeline
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            self.tweets = (NSMutableArray *)tweets;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+        
+        // Stop the refreshControl regardless of the response
+        [self.refreshControl endRefreshing];
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,15 +45,12 @@
     // Added a fixed cell height for now, later this will be changed to auto layout
     self.tableView.rowHeight = 210;
     
-    // Get timeline
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-        if (tweets) {
-            self.tweets = (NSMutableArray *)tweets;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
-    }];
+    [self getTimeline];
+    
+    // Instantiate and configure the refreshControl
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getTimeline) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
