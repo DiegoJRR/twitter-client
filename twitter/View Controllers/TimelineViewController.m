@@ -10,6 +10,7 @@
 #import "APIManager.h"
 #import "TweetCell.h"
 #import "Tweet.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -25,6 +26,9 @@
     // Set self as dataSource and delegate for the tableView
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    // Added a fixed cell height for now, later this will be changed to auto layout
+    self.tableView.rowHeight = 210;
     
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
@@ -58,11 +62,45 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
+    Tweet *tweet = (Tweet *)self.tweets[indexPath.row];
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
-    Tweet *tweet = (Tweet *)self.tweets[indexPath.row];
+    // Set the basic properties for the tweet cell
     cell.tweetLabel.text = tweet.text;
-    NSLog(@"%@", cell.tweetLabel.text);
+    cell.usernameLabel.text = tweet.user.name;
+    cell.handleLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
+    cell.dateLabel.text = tweet.createdAtString;
+    [cell.retweetButton setTitle:[NSString stringWithFormat:@"%i", tweet.retweetCount] forState:UIControlStateNormal];
+    [cell.favButton setTitle:[NSString stringWithFormat:@"%i", tweet.favoriteCount] forState:UIControlStateNormal];
+    
+    // Create the request for the user profile image
+    NSURLRequest *request = [NSURLRequest requestWithURL:tweet.user.profile_image_url_https];
+    
+    // Set poster to nil to remove the old one (when refreshing) and query for the new one
+    cell.userImageView.image = nil;
+    
+    // Instantiate a weak link to the cell and fade in the image in the request
+    __weak TweetCell *weakSelf = cell;
+    [weakSelf.userImageView setImageWithURLRequest:request placeholderImage:nil
+                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+                        
+                        // imageResponse will be nil if the image is cached
+                        if (imageResponse) {
+                            weakSelf.userImageView.alpha = 0.0;
+                            weakSelf.userImageView.image = image;
+                            
+                            //Animate UIImageView back to alpha 1 over 0.3sec
+                            [UIView animateWithDuration:0.5 animations:^{
+                                weakSelf.userImageView.alpha = 1.0;
+                            }];
+                        }
+                        else {
+                            weakSelf.userImageView.image = image;
+                        }
+                    }
+                    failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+                        // do something for the failure condition
+                    }];
     
     
     return cell;
