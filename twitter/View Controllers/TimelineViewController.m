@@ -20,6 +20,18 @@
 
 @implementation TimelineViewController
 
+- (void)getTimeline {
+    // Get timeline
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            self.tweets = (NSMutableArray *)tweets;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,15 +42,8 @@
     // Added a fixed cell height for now, later this will be changed to auto layout
     self.tableView.rowHeight = 210;
     
-    // Get timeline
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-        if (tweets) {
-            self.tweets = (NSMutableArray *)tweets;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
-    }];
+    [self getTimeline];
+    
 }
 
 - (void)didReceiveMemoryWarning {
