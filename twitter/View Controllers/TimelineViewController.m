@@ -11,29 +11,16 @@
 #import "TweetCell.h"
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation TimelineViewController
-
-- (void)getTimeline {
-    // Get timeline
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-        if (tweets) {
-            self.tweets = (NSMutableArray *)tweets;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
-        
-        // Stop the refreshControl regardless of the response
-        [self.refreshControl endRefreshing];
-    }];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,20 +40,32 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
+- (void)didTweet:(nonnull Tweet *)tweet {
+    // Add the posted tweet to the tweets list and refresh the tableView
+    [self.tweets addObject:tweet];
+    [self.tableView reloadData];
+}   
+
+- (void)getTimeline {
+    // Get timeline
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            self.tweets = (NSMutableArray *)tweets;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+        
+        // Stop the refreshControl regardless of the response
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
@@ -118,5 +117,13 @@
     return cell;
 }
 
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UINavigationController *navigationController = [segue destinationViewController];
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    composeController.delegate = self;
+}
 
 @end

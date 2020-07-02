@@ -45,13 +45,56 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="osx-NC-afp"/>
                     </view>
+                    <navigationItem key="navigationItem" id="0uz-jD-gaa"/>
                     <connections>
-                        <segue destination="FTQ-G1-N2b" kind="presentation" identifier="loginSegue" id="CHf-4w-b5m"/>
+                        <segue destination="FTQ-G1-N2b" kind="showDetail" identifier="loginSegue" id="CHf-4w-b5m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKJ-HH-8tn" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="RqH-DV-pb8">
+            <objects>
+                <viewController id="Cag-HJ-cRJ" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nua-fX-540">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BWU-cA-2hU">
+                                <rect key="frame" x="0.0" y="56" width="414" height="205"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gk4-O7-ej0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NMs-s4-jVs">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="close-icon" id="k2D-lI-taL">
+                            <connections>
+                                <action selector="closeCompose:" destination="Cag-HJ-cRJ" id="txR-ZT-TAY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="R1P-j9-bCQ">
+                            <connections>
+                                <action selector="tweetAction:" destination="Cag-HJ-cRJ" id="pX4-5a-bol"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="closeButton" destination="k2D-lI-taL" id="7AO-Eq-bBl"/>
+                        <outlet property="textInput" destination="BWU-cA-2hU" id="FSl-31-c3O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpw-DV-rPf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="979.71014492753636" y="962.94642857142856"/>
         </scene>
         <!--Home Timeline-->
         <scene sceneID="1Tv-nE-1AW">
@@ -147,7 +190,14 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE"/>
+                    <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="usV-dU-BmJ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="edit-icon" id="FCQ-n4-fKJ">
+                            <connections>
+                                <segue destination="rBt-TR-26o" kind="presentation" id="XWZ-xV-rV7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="NVg-l7-Z3g" id="BIv-Mu-oyz"/>
                     </connections>
@@ -174,9 +224,29 @@
             </objects>
             <point key="canvasLocation" x="860" y="36.431784107946029"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K3b-fI-g43">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rBt-TR-26o" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yQT-uy-AN6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Cag-HJ-cRJ" kind="relationship" relationship="rootViewController" id="qdY-f0-I2q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tec-lD-xay" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="69.565217391304358" y="962.94642857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="133.33332824707031" height="133.33332824707031"/>
+        <image name="close-icon" width="26" height="24"/>
+        <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
         <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
