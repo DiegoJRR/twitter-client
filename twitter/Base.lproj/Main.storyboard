@@ -61,6 +61,17 @@
                     <view key="view" contentMode="scaleToFill" id="Nua-fX-540">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BWU-cA-2hU">
+                                <rect key="frame" x="0.0" y="56" width="414" height="205"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="gk4-O7-ej0"/>
                     </view>
@@ -70,10 +81,15 @@
                                 <action selector="closeCompose:" destination="Cag-HJ-cRJ" id="txR-ZT-TAY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="R1P-j9-bCQ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="R1P-j9-bCQ">
+                            <connections>
+                                <action selector="tweetAction:" destination="Cag-HJ-cRJ" id="pX4-5a-bol"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="closeButton" destination="k2D-lI-taL" id="7AO-Eq-bBl"/>
+                        <outlet property="textInput" destination="BWU-cA-2hU" id="FSl-31-c3O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lpw-DV-rPf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
