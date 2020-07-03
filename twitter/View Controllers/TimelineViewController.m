@@ -76,7 +76,21 @@
     Tweet *tweet = (Tweet *)self.tweets[indexPath.row];
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
+    cell.tweet = tweet;
+    
     // Set the basic properties for the tweet cell
+    if (tweet.favorited) {
+        [cell.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon-red"]];
+    } else {
+        [cell.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon"]];
+    }
+    
+    if (tweet.retweeted) {
+        [cell.retweetButton.imageView setImage:[UIImage imageNamed:@"retweet-icon-green"]];
+    } else {
+        [cell.retweetButton.imageView setImage:[UIImage imageNamed:@"retweet-icon"]];
+    }
+    
     cell.tweetLabel.text = tweet.text;
     cell.usernameLabel.text = tweet.user.name;
     cell.handleLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
@@ -85,7 +99,7 @@
     [cell.favButton setTitle:[NSString stringWithFormat:@"%i", tweet.favoriteCount] forState:UIControlStateNormal];
     
     // Create the request for the user profile image
-    NSURLRequest *request = [NSURLRequest requestWithURL:tweet.user.profile_image_url_https];
+    NSURLRequest *request = [NSURLRequest requestWithURL:tweet.user.profileImageURL];
     
     // Set poster to nil to remove the old one (when refreshing) and query for the new one
     cell.userImageView.image = nil;

@@ -149,20 +149,26 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELh-Hu-goH">
-                                            <rect key="frame" x="151" y="169" width="76" height="30"/>
+                                            <rect key="frame" x="151" y="167" width="76" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal" title="Button" image="retweet-icon">
                                                 <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </state>
+                                            <connections>
+                                                <action selector="didTapRetweet:" destination="RXI-7c-ysP" eventType="touchUpInside" id="Lie-21-5Te"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKn-li-dTx">
-                                            <rect key="frame" x="230" y="169" width="76" height="30"/>
+                                            <rect key="frame" x="230" y="168" width="76" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal" title="Button" image="favor-icon">
                                                 <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </state>
+                                            <connections>
+                                                <action selector="didTapFavorite:" destination="RXI-7c-ysP" eventType="touchUpInside" id="JVf-AJ-lg5"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3a-1Q-30H">
                                             <rect key="frame" x="332" y="169" width="76" height="30"/>
