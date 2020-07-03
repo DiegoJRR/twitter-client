@@ -92,8 +92,14 @@ static NSString *consumerSecret;
 }
 
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/favorites/create.json";
+    NSString *urlString = nil;
     NSDictionary *parameters = @{@"id": tweet.idStr};
+    
+    if (tweet.favorited) {
+        urlString = @"1.1/favorites/destroy.json";
+    } else {
+        urlString = @"1.1/favorites/create.json";
+    }
     
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {

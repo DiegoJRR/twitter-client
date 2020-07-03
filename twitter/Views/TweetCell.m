@@ -25,18 +25,27 @@
 
 - (IBAction)didTapFavorite:(id)sender {
     
-    self.tweet.favorited = YES;
-    self.tweet.favoriteCount += 1;
-    
     [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
         if(error){
              NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
         }
         else{
-            [self.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon-red"]];
-            NSLog(@"Successfully favorited");
+            if (self.tweet.favorited) {
+                self.tweet.favorited = NO;
+                self.tweet.favoriteCount -= 1;
+                
+                [self.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon"]];
+                
+            } else {
+                self.tweet.favorited = YES;
+                self.tweet.favoriteCount += 1;
+                
+                [self.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon-red"]];
+            }
         }
     }];
+    
+    [self refreshData];
 }
 
 -(void)refreshData {
