@@ -85,6 +85,12 @@
         [cell.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon"]];
     }
     
+    if (tweet.retweeted) {
+        [cell.retweetButton.imageView setImage:[UIImage imageNamed:@"retweet-icon-green"]];
+    } else {
+        [cell.retweetButton.imageView setImage:[UIImage imageNamed:@"retweet-icon"]];
+    }
+    
     cell.tweetLabel.text = tweet.text;
     cell.usernameLabel.text = tweet.user.name;
     cell.handleLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
