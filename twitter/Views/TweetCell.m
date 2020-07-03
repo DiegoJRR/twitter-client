@@ -48,6 +48,32 @@
     [self refreshData];
 }
 
+- (IBAction)didTapRetweet:(id)sender {
+        
+        [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                 NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+            
+            } else {
+                if (self.tweet.retweeted) {
+                    self.tweet.retweeted = NO;
+                    self.tweet.retweetCount -= 1;
+                    
+                    [self.retweetButton.imageView setImage:[UIImage imageNamed:@"retweet-icon"]];
+                    
+                } else {
+                    self.tweet.retweeted = YES;
+                    self.tweet.retweetCount += 1;
+                    
+                    [self.retweetButton.imageView setImage:[UIImage imageNamed:@"retweet-icon-green"]];
+                }
+            }
+            
+          }];
+    
+    [self refreshData];
+}
+
 -(void)refreshData {
     
     self.usernameLabel.text = self.tweet.user.name;

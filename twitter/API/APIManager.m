@@ -112,4 +112,28 @@ static NSString *consumerSecret;
     }];
 }
 
+- (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
+    NSString *urlFirstString = nil;
+    
+    if (tweet.retweeted) {
+        urlFirstString = @"1.1/statuses/unretweet/";
+    } else {
+        urlFirstString = @"1.1/statuses/retweet/";
+    }
+    
+    NSString *urlSecondString = [urlFirstString stringByAppendingString:tweet.idStr];
+    NSString *urlString = [urlSecondString stringByAppendingString:@".json"];
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+        
+    }];
+}
+
+
 @end
