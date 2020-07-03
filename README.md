@@ -8,14 +8,14 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] User sees app icon in home screen and styled launch screen
-- [ ] User can sign in using OAuth login flow
+- [ x ] User sees app icon in home screen and styled launch screen
+- [ x ] User can sign in using OAuth login flow
 - [ ] User can Logout
-- [ ] User can view last 20 tweets from their home timeline
-- [ ] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
-- [ ] User can pull to refresh.
-- [ ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
-- [ ] User can compose a new tweet by tapping on a compose button.
+- [ x ] User can view last 20 tweets from their home timeline
+- [ x ] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
+- [ x ] User can pull to refresh.
+- [ x ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
+- [ x ] User can compose a new tweet by tapping on a compose button.
 - [ ] Using AutoLayout, the Tweet cell should adjust its layout for iPhone 11, Pro and SE device sizes as well as accommodate device rotation.
 - [ ] User should display the relative timestamp for each tweet "8m", "7h"
 - [ ] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
@@ -53,7 +53,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/adR1nOszI7.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
