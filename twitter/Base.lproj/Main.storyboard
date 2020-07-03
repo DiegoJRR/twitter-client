@@ -197,7 +197,11 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="usV-dU-BmJ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="usV-dU-BmJ">
+                            <connections>
+                                <action selector="logoutAction:" destination="Lbl-k5-U4i" id="fa1-FD-aWZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="edit-icon" id="FCQ-n4-fKJ">
                             <connections>
                                 <segue destination="rBt-TR-26o" kind="presentation" id="XWZ-xV-rV7"/>
