@@ -79,6 +79,12 @@
     cell.tweet = tweet;
     
     // Set the basic properties for the tweet cell
+    if (tweet.favorited) {
+        [cell.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon-red"]];
+    } else {
+        [cell.favButton.imageView setImage:[UIImage imageNamed:@"favor-icon"]];
+    }
+    
     cell.tweetLabel.text = tweet.text;
     cell.usernameLabel.text = tweet.user.name;
     cell.handleLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
